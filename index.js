@@ -3,12 +3,12 @@ const { ethers } = require('ethers');
 
 // Load configurations
 const RPC_URL = process.env.RPC_URL;
-const PRIVATE_KEY = process.env.PRIVATE_KEY;
+const SECRET_PHRASE = process.env.SECRET_PHRASE; // 12-word phrase
 const BASE_TOKEN = process.env.BASE_TOKEN;     // WBNB or WETH
 const ROUTER_ADDRESS = process.env.ROUTER_ADDRESS;
 const FACTORY_ADDRESS = process.env.FACTORY_ADDRESS;
 
-if (!RPC_URL || !PRIVATE_KEY || !BASE_TOKEN || !ROUTER_ADDRESS || !FACTORY_ADDRESS) {
+if (!RPC_URL || !SECRET_PHRASE || !BASE_TOKEN || !ROUTER_ADDRESS || !FACTORY_ADDRESS) {
     console.error("Please fill in all variables in the .env file.");
     process.exit(1);
 }
@@ -18,7 +18,7 @@ const provider = new ethers.JsonRpcProvider(RPC_URL);
 
 // 2. Connect Wallet
 // This wallet instance can sign transactions on behalf of the TrustWallet account
-const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
+const wallet = ethers.Wallet.fromPhrase(SECRET_PHRASE, provider);
 
 console.log(`Bot connected with TrustWallet account: ${wallet.address}`);
 
