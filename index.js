@@ -40,8 +40,10 @@ const routerABI = [
 const factoryContract = new ethers.Contract(FACTORY_ADDRESS, factoryABI, provider);
 const routerContract = new ethers.Contract(ROUTER_ADDRESS, routerABI, wallet);
 
-// amountIn: Amount of BNB/WBNB you want to spend (e.g., 0.01 BNB)
-const amountIn = ethers.parseUnits('0.01', 18);
+// amountIn: Amount of BNB/WBNB you want to spend per snipe
+// We default to 0.005 BNB so it works with smaller test balances, but you can override it in Railway
+const buyAmountValue = process.env.BUY_AMOUNT || '0.005';
+const amountIn = ethers.parseUnits(buyAmountValue, 18);
 
 async function buyToken(targetToken) {
     try {
