@@ -9,7 +9,12 @@ const ROUTER_ADDRESS = process.env.ROUTER_ADDRESS;
 const FACTORY_ADDRESS = process.env.FACTORY_ADDRESS;
 
 if (!RPC_URL || !SECRET_PHRASE || !BASE_TOKEN || !ROUTER_ADDRESS || !FACTORY_ADDRESS) {
-    console.error("Please fill in all variables in the .env file.");
+    console.error("ENVIRONMENT VARIABLE ERROR: One or more configuration variables are missing.");
+    console.error(`- RPC_URL: ${RPC_URL ? 'FOUND' : 'MISSING'}`);
+    console.error(`- SECRET_PHRASE: ${SECRET_PHRASE ? 'FOUND' : 'MISSING'}`);
+    console.error(`- BASE_TOKEN: ${BASE_TOKEN ? 'FOUND' : 'MISSING'}`);
+    console.error(`- ROUTER_ADDRESS: ${ROUTER_ADDRESS ? 'FOUND' : 'MISSING'}`);
+    console.error(`- FACTORY_ADDRESS: ${FACTORY_ADDRESS ? 'FOUND' : 'MISSING'}`);
     process.exit(1);
 }
 
